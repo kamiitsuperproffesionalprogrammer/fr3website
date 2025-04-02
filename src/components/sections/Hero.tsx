@@ -1,22 +1,74 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
 
 export const Hero: React.FC = () => {
   return (
-    <section className="relative h-[600px] flex items-center justify-center bg-gradient-to-b from-gray-50 to-white overflow-hidden">
-      <div className="absolute inset-0 opacity-20 bg-cover bg-center" 
-           style={{backgroundImage: "url('https://images.unsplash.com/photo-1540039155733-5bb30b53aa14?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80')"}} />
+    <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
+      <motion.div 
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.3 }}
+        transition={{ duration: 1 }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: "url('/pictures/background pic 1.jpg')",
+          filter: "grayscale(100%)"
+        }}
+      />
       
       <div className="relative z-10 text-center px-6 max-w-2xl">
-        <h1 className="text-5xl font-bold mb-6 text-gray-800">FRANCHISE</h1>
-        <p className="text-lg text-gray-600 mb-8">
-          Сезонный медиапроект, созданный для развития музыкальной культуры
-        </p>
-        <div className="flex gap-4 justify-center">
-          <Button className="rounded-full px-8 py-6">Explore Music</Button>
-          <Button variant="outline" className="rounded-full px-8 py-6">Learn More</Button>
-        </div>
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+        >
+          <h1 className="text-7xl font-bold mb-6 text-white">
+            FRANCHISE
+          </h1>
+          <p className="text-xl text-white/80 mb-12 font-light">
+            Сезонный медиапроект, созданный для развития музыкальной культуры
+          </p>
+        </motion.div>
+
+        <motion.div 
+          className="flex gap-6 justify-center"
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.4 }}
+        >
+          <Button 
+            className="rounded-lg px-8 py-6 bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+          >
+            Explore Music
+          </Button>
+          <Button 
+            variant="outline" 
+            className="rounded-lg px-8 py-6 border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
+          >
+            Learn More
+          </Button>
+        </motion.div>
+
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          className="mt-16 flex justify-center"
+        >
+          <div className="w-6 h-10 border-2 border-white/30 rounded-full p-1">
+            <motion.div
+              animate={{
+                y: [0, 12, 0],
+              }}
+              transition={{
+                duration: 1.5,
+                repeat: Infinity,
+                repeatType: "loop",
+              }}
+              className="w-1.5 h-1.5 bg-white/50 rounded-full mx-auto"
+            />
+          </div>
+        </motion.div>
       </div>
     </section>
   );
