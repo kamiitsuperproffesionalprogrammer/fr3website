@@ -11,7 +11,7 @@ export const Hero: React.FC = () => {
       <div className="relative z-10 text-center px-6 max-w-2xl">
         <h1 className="text-5xl font-bold mb-6 text-gray-800">FRANCHISE</h1>
         <p className="text-lg text-gray-600 mb-8">
-          Сезонный медиапроект, созданный для развития музыкальной культуры
+          Сезонный медиапроект, созданный для р
         </p>
         <div className="flex gap-4 justify-center">
           <Button className="rounded-full px-8 py-6">Explore Music</Button>
