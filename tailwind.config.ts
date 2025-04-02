@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,6 +53,57 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// iOS-like colors
+				ios: {
+					gray: {
+						50: '#F2F2F7',
+						100: '#E5E5EA',
+						200: '#D1D1D6',
+						300: '#C7C7CC',
+						400: '#AEAEB2',
+						500: '#8E8E93',
+						600: '#636366',
+						700: '#48484A',
+						800: '#3A3A3C',
+						900: '#1C1C1E',
+					},
+					blue: {
+						DEFAULT: '#007AFF',
+						dark: '#0A84FF',
+					},
+					green: {
+						DEFAULT: '#34C759',
+						dark: '#30D158',
+					},
+					indigo: {
+						DEFAULT: '#5856D6',
+						dark: '#5E5CE6',
+					},
+					orange: {
+						DEFAULT: '#FF9500',
+						dark: '#FF9F0A',
+					},
+					pink: {
+						DEFAULT: '#FF2D55',
+						dark: '#FF375F',
+					},
+					purple: {
+						DEFAULT: '#AF52DE',
+						dark: '#BF5AF2',
+					},
+					red: {
+						DEFAULT: '#FF3B30',
+						dark: '#FF453A',
+					},
+					teal: {
+						DEFAULT: '#5AC8FA',
+						dark: '#64D2FF',
+					},
+					yellow: {
+						DEFAULT: '#FFCC00',
+						dark: '#FFD60A',
+					},
+				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
@@ -67,6 +119,15 @@ export default {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
+			},
+			fontFamily: {
+				sans: [
+					'"SF Pro Display"', 
+					'-apple-system', 
+					'BlinkMacSystemFont', 
+					'Inter',
+					'sans-serif'
+				],
 			},
 			keyframes: {
 				'accordion-down': {

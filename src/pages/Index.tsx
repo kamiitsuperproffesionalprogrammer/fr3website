@@ -1,13 +1,15 @@
+
 import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Members } from "@/components/sections/Members";
 import { SoundKit } from "@/components/sections/SoundKit";
 import { Album } from "@/components/sections/Album";
+import { Toaster } from "@/components/ui/toaster";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <Header />
       <main>
         <Hero />
@@ -16,6 +18,7 @@ const Index = () => {
         <SoundKit />
         <Album />
       </main>
+      <Toaster />
     </div>
   );
 };

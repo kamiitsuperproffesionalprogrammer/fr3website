@@ -1,29 +1,43 @@
+
 import React, { useState } from "react";
 import { MusicPlayer } from "@/components/ui/MusicPlayer";
+import { Button } from "@/components/ui/button";
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 
 export const Album: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
 
   return (
-    <section id="album" className="bg-[#636363] pt-[35px]">
-      <div className="flex items-center justify-between px-[34px] py-0">
-        <div className="flex gap-[5px] border border-slate-300 bg-white px-[5px] py-1 rounded-md border-solid">
-          <button className="text-black text-sm px-3 py-1.5 hover:bg-gray-100 rounded">
-            2
-          </button>
-          <button className="text-black text-sm px-3 py-1.5 hover:bg-gray-100 rounded">
-            3
-          </button>
+    <section id="album" className="py-20 px-6 bg-white">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center justify-between mb-10">
+          <Tabs defaultValue="2">
+            <TabsList className="bg-gray-100">
+              <TabsTrigger value="2">2</TabsTrigger>
+              <TabsTrigger value="3">3</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <h2 className="text-3xl font-bold text-gray-800">ALBUM</h2>
         </div>
-        <h2 className="text-white text-[32px] font-bold">ALBUM</h2>
+        
+        <div className="mb-16 max-w-2xl mx-auto">
+          <AspectRatio ratio={1/1} className="bg-gray-100 rounded-full overflow-hidden">
+            <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+              <span className="text-gray-400 text-xl">Album Cover</span>
+            </div>
+          </AspectRatio>
+        </div>
+        
+        <div className="mt-10">
+          <MusicPlayer
+            isPlaying={isPlaying}
+            onPlayPause={() => setIsPlaying(!isPlaying)}
+            onPrevious={() => console.log("Previous track")}
+            onNext={() => console.log("Next track")}
+          />
+        </div>
       </div>
-      <div className="w-[930px] h-[930px] relative bg-[#D9D9D9] mx-auto my-[63px] rounded-[50%]" />
-      <MusicPlayer
-        isPlaying={isPlaying}
-        onPlayPause={() => setIsPlaying(!isPlaying)}
-        onPrevious={() => console.log("Previous track")}
-        onNext={() => console.log("Next track")}
-      />
     </section>
   );
 };
