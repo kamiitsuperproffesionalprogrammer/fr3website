@@ -16,19 +16,19 @@ interface Track {
 }
 
 const tracks: Track[] = [
-  { id: 1, title: "Dawn of a New Day", artist: "Alex Thompson", duration: "3:45", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 2, title: "Midnight Dreams", artist: "Sarah Chen", duration: "4:12", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 3, title: "Echoes in the Wind", artist: "Marcus Rodriguez", duration: "3:58", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 4, title: "Silent Whispers", artist: "Emma Watson", duration: "4:30", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 5, title: "Dancing Shadows", artist: "James Wilson", duration: "3:15", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 6, title: "Ocean Waves", artist: "Sophie Anderson", duration: "4:45", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 7, title: "Starlight", artist: "David Kim", duration: "3:20", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 8, title: "Mountain Air", artist: "Lisa Park", duration: "4:05", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 9, title: "Desert Wind", artist: "Michael Brown", duration: "3:55", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 10, title: "City Lights", artist: "Rachel Green", duration: "4:15", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 11, title: "Forest Path", artist: "Thomas Lee", duration: "3:40", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 12, title: "Northern Lights", artist: "Nina Patel", duration: "4:25", audioUrl: "/src/audio/5_NEWDAY.wav" },
-  { id: 13, title: "Sunset Dreams", artist: "Chris Martinez", duration: "3:50", audioUrl: "/src/audio/5_NEWDAY.wav" },
+  { id: 1, title: "hC INTRO", artist: "FRANCHISE2, yukibleeding", duration: "2:09", audioUrl: "/src/audio/1_hC_INTRO.wav" },
+  { id: 2, title: "WORLD", artist: "FRANCHISE2, modestmorty", duration: "1:31", audioUrl: "/src/audio/2_WORLD.wav" },
+  { id: 3, title: "CARTOON", artist: "FRANCHISE2, childchewer, komit", duration: "2:34", audioUrl: "/src/audio/3_CARTOON.wav" },
+  { id: 4, title: "GULIVER", artist: "FRANCHISE2, modestmorty, childchewer", duration: "2:08", audioUrl: "/src/audio/4_GULIVER.wav" },
+  { id: 5, title: "NEWDAY", artist: "FRANCHISE2, zmny, ayoluvme", duration: "2:03", audioUrl: "/src/audio/5_NEWDAY.wav" },
+  { id: 6, title: "CUTOFF", artist: "FRANCHISE2, childchewer, zmny", duration: "2:04", audioUrl: "/src/audio/6_CUTOFF.wav" },
+  { id: 7, title: "POWERBANK", artist: "FRANCHISE2, spadegocrazy, Mike Hokku", duration: "1:36", audioUrl: "/src/audio/7_POWERBANK.wav" },
+  { id: 8, title: "SPEND", artist: "FRANCHISE2, zmny, nexmend", duration: "2:09", audioUrl: "/src/audio/8_SPEND.wav" },
+  { id: 9, title: "СИМПТОМЫ", artist: "FRANCHISE2, modestmorty, kanbuu, 4, Mike Hokku", duration: "2:47", audioUrl: "/src/audio/9_СИМПТОМЫ.wav" },
+  { id: 10, title: "SPORT", artist: "FRANCHISE2, AIICA, ayoluvme", duration: "2:29", audioUrl: "/src/audio/10_SPORT.wav" },
+  { id: 11, title: "WANT", artist: "FRANCHISE2, zmny, childchewer, ayoluvme", duration: "2:58", audioUrl: "/src/audio/11_WANT.wav" },
+  { id: 12, title: "МЕЖДУ", artist: "FRANCHISE2, spadegocrazy, childchewer", duration: "1:43", audioUrl: "/src/audio/12_МЕЖДУ.wav" },
+  { id: 13, title: "MAINSTREAMLOVE", artist: "FRANCHISE2, ayoluvme, komit", duration: "1:51", audioUrl: "/src/audio/13_MAINSTREAMLOVE.wav" },
 ];
 
 export const Album: React.FC = () => {
@@ -44,7 +44,6 @@ export const Album: React.FC = () => {
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      setIsPlaying(false);
       setCurrentTime(0);
     }
 
@@ -61,9 +60,19 @@ export const Album: React.FC = () => {
     });
 
     audio.addEventListener('ended', () => {
-      setIsPlaying(false);
-      setCurrentTime(0);
+      const currentIndex = tracks.findIndex(track => track.id === currentTrack.id);
+      if (currentIndex < tracks.length - 1) {
+        setCurrentTrack(tracks[currentIndex + 1]);
+        setIsPlaying(true);
+      } else {
+        setIsPlaying(false);
+        setCurrentTime(0);
+      }
     });
+
+    if (isPlaying) {
+      audio.play();
+    }
 
     return () => {
       audio.removeEventListener('loadedmetadata', () => {});
@@ -72,7 +81,7 @@ export const Album: React.FC = () => {
       audio.pause();
       audio.currentTime = 0;
     };
-  }, [currentTrack]);
+  }, [currentTrack, isPlaying]);
 
   const handlePlayPause = () => {
     if (audioRef.current) {
@@ -105,20 +114,12 @@ export const Album: React.FC = () => {
     setCurrentTime(newTime);
     if (audioRef.current) {
       audioRef.current.currentTime = newTime;
-      if (!isPlaying) {
-        audioRef.current.pause();
-      }
     }
   };
 
   const handleTrackChange = (track: Track) => {
     setCurrentTrack(track);
-    if (audioRef.current) {
-      audioRef.current.pause();
-      audioRef.current.currentTime = 0;
-      setIsPlaying(false);
-      setCurrentTime(0);
-    }
+    setIsPlaying(true);
   };
 
   const formatTime = (time: number) => {
@@ -164,7 +165,7 @@ export const Album: React.FC = () => {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
-            className="w-full lg:w-1/2"
+            className="w-full lg:w-[400px]"
           >
             <AspectRatio ratio={1/1} className="bg-gray-100 rounded-3xl overflow-hidden shadow-2xl mb-8">
               <div className="w-full h-full flex items-center justify-center relative group">
@@ -215,18 +216,6 @@ export const Album: React.FC = () => {
                     max={duration}
                     value={currentTime}
                     onChange={handleTimeChange}
-                    onMouseDown={() => {
-                      if (audioRef.current) {
-                        audioRef.current.pause();
-                        setIsPlaying(false);
-                      }
-                    }}
-                    onMouseUp={() => {
-                      if (audioRef.current && !isMuted) {
-                        audioRef.current.play();
-                        setIsPlaying(true);
-                      }
-                    }}
                     className="absolute inset-0 w-full h-full cursor-pointer appearance-none bg-transparent [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-black [&::-webkit-slider-thumb]:cursor-pointer [&::-webkit-slider-thumb]:z-10"
                   />
                 </div>
@@ -265,54 +254,54 @@ export const Album: React.FC = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
-            className="w-full lg:w-1/2 bg-white/80 backdrop-blur-xl rounded-2xl p-6 shadow-xl h-full"
+            className="w-full lg:w-[calc(100%-432px)] bg-white/80 backdrop-blur-xl rounded-2xl p-6 shadow-xl"
           >
             <div className="grid grid-cols-2 gap-4 h-full">
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {tracks.slice(0, 7).map((track) => (
                   <div
                     key={track.id}
-                    className={`flex items-center justify-between p-3 rounded-lg transition-colors cursor-pointer ${
+                    className={`flex items-center justify-between p-3 rounded-xl transition-all duration-300 cursor-pointer ${
                       currentTrack.id === track.id
-                        ? "bg-black/5"
-                        : "hover:bg-gray-50"
+                        ? "bg-black/5 shadow-md"
+                        : "hover:bg-gray-50/80"
                     }`}
                     onClick={() => handleTrackChange(track)}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-gray-500 w-6">{track.id.toString().padStart(2, '0')}</span>
-                      <div>
+                      <span className="text-gray-400 font-medium w-6 text-sm">{track.id.toString().padStart(2, '0')}</span>
+                      <div className="space-y-1">
                         <h4 className="font-medium text-gray-800 text-sm">{track.title}</h4>
-                        <Link to={`/members/${track.artist.toLowerCase().replace(/\s+/g, '-')}`} className="text-xs text-gray-500 hover:text-black transition-colors">
+                        <Link to={`/members/${track.artist.toLowerCase().replace(/\s+/g, '-')}`} className="text-xs text-gray-500 hover:text-black transition-colors block">
                           {track.artist}
                         </Link>
                       </div>
                     </div>
-                    <span className="text-gray-500 text-sm">{track.duration}</span>
+                    <span className="text-gray-400 text-xs font-medium">{track.duration}</span>
                   </div>
                 ))}
               </div>
-              <div className="space-y-4">
+              <div className="space-y-3">
                 {tracks.slice(7).map((track) => (
                   <div
                     key={track.id}
-                    className={`flex items-center justify-between p-3 rounded-lg transition-colors cursor-pointer ${
+                    className={`flex items-center justify-between p-3 rounded-xl transition-all duration-300 cursor-pointer ${
                       currentTrack.id === track.id
-                        ? "bg-black/5"
-                        : "hover:bg-gray-50"
+                        ? "bg-black/5 shadow-md"
+                        : "hover:bg-gray-50/80"
                     }`}
                     onClick={() => handleTrackChange(track)}
                   >
                     <div className="flex items-center gap-3">
-                      <span className="text-gray-500 w-6">{track.id.toString().padStart(2, '0')}</span>
-                      <div>
+                      <span className="text-gray-400 font-medium w-6 text-sm">{track.id.toString().padStart(2, '0')}</span>
+                      <div className="space-y-1">
                         <h4 className="font-medium text-gray-800 text-sm">{track.title}</h4>
-                        <Link to={`/members/${track.artist.toLowerCase().replace(/\s+/g, '-')}`} className="text-xs text-gray-500 hover:text-black transition-colors">
+                        <Link to={`/members/${track.artist.toLowerCase().replace(/\s+/g, '-')}`} className="text-xs text-gray-500 hover:text-black transition-colors block">
                           {track.artist}
                         </Link>
                       </div>
                     </div>
-                    <span className="text-gray-500 text-sm">{track.duration}</span>
+                    <span className="text-gray-400 text-xs font-medium">{track.duration}</span>
                   </div>
                 ))}
               </div>
