@@ -1,20 +1,41 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 export const Hero: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (video) {
+      video.addEventListener('timeupdate', () => {
+        if (video.currentTime >= video.duration - 2.5) {
+          video.currentTime = 0;
+        }
+      });
+    }
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center bg-black overflow-hidden">
       <motion.div 
         initial={{ opacity: 0 }}
-        animate={{ opacity: 0.3 }}
+        animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
-        className="absolute inset-0 bg-cover bg-center"
-        style={{
-          backgroundImage: "url('/pictures/background pic 1.jpg')",
-          filter: "grayscale(100%)"
-        }}
-      />
+        className="absolute inset-0"
+      >
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover"
+        >
+          <source src="/videos/background-video.mp4" type="video/mp4" />
+        </video>
+        <div className="absolute inset-0 bg-black/70" />
+      </motion.div>
       
       <div className="relative z-10 text-center px-6 max-w-2xl">
         <motion.div
@@ -38,14 +59,16 @@ export const Hero: React.FC = () => {
         >
           <Button 
             className="rounded-lg px-8 py-6 bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
+            onClick={() => window.location.href = '#album'}
           >
-            Explore Music
+            MUSIC
           </Button>
           <Button 
             variant="outline" 
             className="rounded-lg px-8 py-6 border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
+            onClick={() => window.location.href = '#about'}
           >
-            Learn More
+            MORE INFO
           </Button>
         </motion.div>
 
