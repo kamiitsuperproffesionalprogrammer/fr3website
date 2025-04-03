@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
 
 import fr1Cover from "@/pictures/fr1 cover.jpg";
 import fr2Cover from "@/pictures/fr2 cover.jpg";
@@ -15,36 +16,31 @@ const franchiseImages = [
 
 export const About: React.FC = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const { t } = useTranslation();
 
   const tabs = [
     {
       title: "1",
       content: {
-        title: "FRANCHISE I",
-        description: "Создание коллективного разума, способного накапливать творческий потенциал и делиться им.",
-        features: [
-          "Данные о создателе утеряны, но находятся в процессе поиска. Следите за обновлениями."
-        ]
+        title: t('about.tabs.1.title'),
+        description: t('about.tabs.1.description'),
+        features: t('about.tabs.1.features', { returnObjects: true }) as string[]
       }
     },
     {
       title: "2",
       content: {
-        title: "FRANCHISE II",
-        description: "Увеличение предела накапливаемого потенциала; формирование своей айдентики; создание музыкального хранителя и его содержимого; уничтожение конкуренции.",
-        features: [
-          "Влияние на окружающую среду — критическое. Сохранились записи комментариев самих единиц. Следите за обновлениями."
-        ]
+        title: t('about.tabs.2.title'),
+        description: t('about.tabs.2.description'),
+        features: t('about.tabs.2.features', { returnObjects: true }) as string[]
       }
     },
     {
       title: "3",
       content: {
-        title: "FRANCHISE III",
-        description: "Новый виток в раскрытии творческого потенциала. Продюсеры, дизайнеры, программисты и другие креативные единицы соберутся вновь создать искусство, но уже в обновленном формате. На этот раз еще масштабнее, еще качественнее и еще интереснее.",
-        features: [
-          "Следи за обновлениями, чтобы не пропустить важную информацию!"
-        ]
+        title: t('about.tabs.3.title'),
+        description: t('about.tabs.3.description'),
+        features: t('about.tabs.3.features', { returnObjects: true }) as string[]
       }
     }
   ];
@@ -63,7 +59,7 @@ export const About: React.FC = () => {
           className="text-center mb-16"
         >
           <h2 className="text-4xl font-bold mb-4 text-black">
-            ABOUT US
+            {t('about.title')}
           </h2>
           <div className="w-20 h-1 bg-black mx-auto rounded-full" />
         </motion.div>
@@ -78,9 +74,7 @@ export const About: React.FC = () => {
           <Card className="border-none shadow-xl rounded-3xl overflow-hidden bg-white/80 backdrop-blur-xl">
             <CardContent className="p-8">
               <p className="text-gray-700 text-xl leading-relaxed font-light">
-                FRANCHISE — сезонный медиапроект, созданный в целях развития музыкальной
-                культуры в России и роста каждого участника как творческой и командной
-                единицы.
+                {t('about.description')}
               </p>
             </CardContent>
           </Card>

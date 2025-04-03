@@ -1,0 +1,61 @@
+{
+  "common": {
+    "home": "Home",
+    "soundkit": "Sound Kit",
+    "allMembers": "All Members",
+    "notFound": "Page Not Found",
+    "language": "Language"
+  },
+  "home": {
+    "title": "Welcome to FR3",
+    "description": "Your premium sound kit destination"
+  },
+  "hero": {
+    "title": "FRANCHISE",
+    "description": "A seasonal media project created to develop musical culture",
+    "buttons": {
+      "music": "MUSIC",
+      "moreInfo": "MORE INFO"
+    }
+  },
+  "about": {
+    "title": "ABOUT US",
+    "description": "FRANCHISE is a seasonal media project created to develop musical culture in Russia and help each participant grow as a creative and team unit.",
+    "tabs": {
+      "1": {
+        "title": "FRANCHISE I",
+        "description": "Creating a collective mind capable of accumulating creative potential and sharing it.",
+        "features": [
+          "Creator data is lost but is being searched for. Stay tuned for updates."
+        ]
+      },
+      "2": {
+        "title": "FRANCHISE II",
+        "description": "Increasing the limit of accumulated potential; forming our own identity; creating a musical guardian and its contents; eliminating competition.",
+        "features": [
+          "Environmental impact — critical. Records of unit comments have been preserved. Stay tuned for updates."
+        ]
+      },
+      "3": {
+        "title": "FRANCHISE III",
+        "description": "A new turn in revealing creative potential. Producers, designers, programmers, and other creative units will gather again to create art, but in an updated format. This time, even more massive, even better quality, and even more interesting.",
+        "features": [
+          "Follow the updates to not miss important information!"
+        ]
+      }
+    }
+  },
+  "soundkit": {
+    "title": "Sound Kit",
+    "download": "Download",
+    "preview": "Preview"
+  },
+  "members": {
+    "title": "All Members",
+    "noMembers": "No members found"
+  },
+  "errors": {
+    "notFound": "The page you're looking for doesn't exist",
+    "goHome": "Go back home"
+  }
+} 

@@ -1,4 +1,3 @@
-
 import { Header } from "@/components/layout/Header";
 import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
@@ -9,9 +8,9 @@ import { Toaster } from "@/components/ui/toaster";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 w-full">
       <Header />
-      <main>
+      <main className="w-full">
         <Hero />
         <About />
         <Members />

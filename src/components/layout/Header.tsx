@@ -1,20 +1,34 @@
 import React from "react";
 import { Button } from "@/components/ui/button";
-import { Menu } from "lucide-react";
+import { Menu, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import {
   Sheet,
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useTranslation } from "react-i18next";
 
 export const Header: React.FC = () => {
+  const { i18n } = useTranslation();
+
+  const languages = [
+    { code: 'en', name: 'English' },
+    { code: 'ru', name: 'Русский' }
+  ];
+
   return (
     <motion.header 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
-      className="flex items-center justify-between h-[80px] bg-black/90 backdrop-blur-xl px-6 py-4 sticky top-0 z-50 border-b border-white/20"
+      className="fixed top-0 left-0 right-0 flex items-center justify-between h-[80px] bg-black/90 backdrop-blur-xl px-4 py-4 z-50 border-b border-white/20"
     >
       <motion.img
         initial={{ opacity: 0, x: -20 }}
@@ -25,7 +39,7 @@ export const Header: React.FC = () => {
         alt="Logo"
       />
       
-      <nav className="hidden md:flex gap-8 items-center">
+      <nav className="hidden md:flex gap-6 items-center">
         {["about", "members", "soundkit", "album", "merch", "gallery"].map((item, index) => (
           <motion.a
             key={item}
@@ -39,6 +53,25 @@ export const Header: React.FC = () => {
             <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white/60 transition-all duration-300 group-hover:w-full" />
           </motion.a>
         ))}
+        
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="ghost" size="icon" className="text-white/80 hover:text-white">
+              <Globe className="h-5 w-5" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end" className="bg-black/95 backdrop-blur-xl border border-white/20">
+            {languages.map((lang) => (
+              <DropdownMenuItem
+                key={lang.code}
+                onClick={() => i18n.changeLanguage(lang.code)}
+                className="text-white/80 hover:text-white hover:bg-white/10 cursor-pointer"
+              >
+                {lang.name}
+              </DropdownMenuItem>
+            ))}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </nav>
 
       <Sheet>

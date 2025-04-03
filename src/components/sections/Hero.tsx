@@ -1,9 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const Hero: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const video = videoRef.current;
@@ -44,10 +46,10 @@ export const Hero: React.FC = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h1 className="text-7xl font-bold mb-6 text-white">
-            FRANCHISE
+            {t('hero.title')}
           </h1>
           <p className="text-xl text-white/80 mb-12 font-light">
-            Сезонный медиапроект, созданный для развития музыкальной культуры
+            {t('hero.description')}
           </p>
         </motion.div>
 
@@ -61,14 +63,14 @@ export const Hero: React.FC = () => {
             className="rounded-lg px-8 py-6 bg-white/10 border border-white/20 text-white hover:bg-white/20 transition-all duration-300"
             onClick={() => window.location.href = '#album'}
           >
-            MUSIC
+            {t('hero.buttons.music')}
           </Button>
           <Button 
             variant="outline" 
             className="rounded-lg px-8 py-6 border border-white/20 text-white/80 hover:text-white hover:bg-white/10 transition-all duration-300"
             onClick={() => window.location.href = '#about'}
           >
-            MORE INFO
+            {t('hero.buttons.moreInfo')}
           </Button>
         </motion.div>
 
